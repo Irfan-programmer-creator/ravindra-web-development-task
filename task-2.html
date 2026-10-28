@@ -1,0 +1,1063 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopEase | Online Shopping</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #6c4cf1;
+    --dark: #19172a;
+    --light: #f7f7fb;
+    --muted: #77778b;
+    --green: #14804a;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--light);
+    color: var(--dark);
+}
+
+button, input, select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.top-banner {
+    background: #19172a;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+}
+
+.navbar {
+    background: white;
+    padding: 18px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 3px 14px #00000008;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--primary);
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--dark);
+}
+
+.search-box {
+    display: flex;
+    max-width: 470px;
+    flex: 1;
+    background: #f2f1f8;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 13px;
+}
+
+.search-box button {
+    border: none;
+    background: var(--primary);
+    color: white;
+    padding: 0 18px;
+}
+
+.cart-button {
+    border: none;
+    border-radius: 9px;
+    padding: 11px 15px;
+    background: #eee9ff;
+    color: var(--primary);
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+main {
+    max-width: 1400px;
+    margin: auto;
+    padding: 25px 6%;
+}
+
+.hero {
+    background: linear-gradient(120deg, #e9e2ff, #fce6f0);
+    border-radius: 22px;
+    padding: 48px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    overflow: hidden;
+    margin-bottom: 35px;
+}
+
+.hero-content {
+    max-width: 570px;
+}
+
+.eyebrow {
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.12;
+    margin: 15px 0;
+}
+
+.hero p {
+    color: #626075;
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+
+.primary-button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 9px;
+    padding: 13px 22px;
+    font-weight: bold;
+}
+
+.hero img {
+    width: 40%;
+    max-height: 290px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.section-heading h2 {
+    font-size: 27px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 7px;
+}
+
+.categories {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.category-button {
+    background: white;
+    border: 1px solid #e6e3ef;
+    padding: 11px 18px;
+    border-radius: 25px;
+    color: #555368;
+    transition: .2s;
+}
+
+.category-button:hover,
+.category-button.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.toolbar p {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.toolbar select {
+    border: 1px solid #e5e2ef;
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    outline: none;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.product-card {
+    background: white;
+    border: 1px solid #eeecf4;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform .25s, box-shadow .25s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px #26203d12;
+}
+
+.product-image {
+    height: 210px;
+    position: relative;
+    background: #f0eef7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+.discount {
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    background: #ffe6e5;
+    color: #c33b38;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 8px;
+    border-radius: 6px;
+}
+
+.product-info {
+    padding: 17px;
+}
+
+.product-category {
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.product-info h3 {
+    font-size: 16px;
+    margin: 9px 0;
+}
+
+.description {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    min-height: 36px;
+}
+
+.rating {
+    margin: 12px 0;
+    font-size: 12px;
+    color: #e6a323;
+}
+
+.rating span {
+    color: var(--muted);
+    margin-left: 4px;
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.old-price {
+    font-size: 12px;
+    color: #9693a2;
+    text-decoration: line-through;
+}
+
+.add-button {
+    width: 100%;
+    border: 1px solid var(--primary);
+    background: white;
+    color: var(--primary);
+    border-radius: 8px;
+    padding: 11px;
+    font-weight: bold;
+    transition: .2s;
+}
+
+.add-button:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 45px 10px;
+    color: var(--muted);
+}
+
+.benefits {
+    margin: 45px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.benefit {
+    background: white;
+    border: 1px solid #eeecf4;
+    padding: 23px;
+    border-radius: 13px;
+    text-align: center;
+}
+
+.benefit .emoji {
+    font-size: 28px;
+}
+
+.benefit h3 {
+    font-size: 15px;
+    margin: 10px 0 7px;
+}
+
+.benefit p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+footer {
+    background: #19172a;
+    color: white;
+    padding: 32px 6%;
+    text-align: center;
+}
+
+footer p {
+    color: #c2bfd2;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+/* Cart panel */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: #0007;
+    z-index: 19;
+    display: none;
+}
+
+.overlay.show {
+    display: block;
+}
+
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: -430px;
+    height: 100%;
+    width: min(420px, 100%);
+    background: white;
+    z-index: 20;
+    padding: 25px;
+    transition: right .3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-panel.open {
+    right: 0;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.close-button {
+    background: #f0eef7;
+    border: none;
+    padding: 9px 12px;
+    border-radius: 7px;
+}
+
+.cart-items {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item p {
+    font-size: 13px;
+    margin-top: 6px;
+    color: var(--muted);
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 9px;
+}
+
+.quantity-controls button {
+    border: none;
+    background: #eee9ff;
+    color: var(--primary);
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.remove-button {
+    border: none;
+    background: none;
+    color: #c33b38;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.cart-footer {
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.checkout-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    opacity: 0;
+    background: #19172a;
+    color: white;
+    padding: 13px 20px;
+    border-radius: 9px;
+    z-index: 30;
+    transition: .3s;
+    font-size: 14px;
+    text-align: center;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+@media (max-width: 1050px) {
+    .product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 760px) {
+    .navbar {
+        flex-wrap: wrap;
+        padding: 15px 5%;
+    }
+
+    .search-box {
+        order: 3;
+        flex-basis: 100%;
+        max-width: none;
+    }
+
+    main {
+        padding: 20px 5%;
+    }
+
+    .hero {
+        padding: 32px 6%;
+    }
+
+    .hero img {
+        width: 35%;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 13px;
+    }
+
+    .product-image {
+        height: 160px;
+    }
+
+    .product-info {
+        padding: 12px;
+    }
+
+    .benefits {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 420px) {
+    .hero img {
+        display: none;
+    }
+
+    .product-image {
+        height: 135px;
+    }
+
+    .section-heading h2 {
+        font-size: 22px;
+    }
+
+    .price {
+        font-size: 16px;
+    }
+
+    .toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-banner">
+    🎉 FESTIVE SALE IS LIVE — Get up to 50% off selected products!
+</div>
+
+<nav class="navbar">
+    <div class="logo">Shop<span>Ease.</span></div>
+
+    <div class="search-box">
+        <input type="search" id="searchInput"
+               placeholder="Search products...">
+        <button id="searchButton">Search</button>
+    </div>
+
+    <button class="cart-button" id="openCart">
+        🛒 Cart (<span id="cartCount">0</span>)
+    </button>
+</nav>
+
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <span class="eyebrow">Your favourite online store</span>
+            <h1>Big deals.<br>Better shopping.</h1>
+            <p>
+                Discover amazing products, enjoy special discounts,
+                and find something you'll love at ShopEase.
+            </p>
+            <button class="primary-button" id="shopNow">
+                Shop Collection →
+            </button>
+        </div>
+
+        <img
+          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=85"
+          alt="Featured red sneaker">
+    </section>
+
+    <section>
+        <div class="section-heading">
+            <div>
+                <h2>Shop by Category</h2>
+                <p>Find the right product for you.</p>
+            </div>
+        </div>
+
+        <div class="categories" id="categories">
+            <button class="category-button active" data-category="All">All Products</button>
+            <button class="category-button" data-category="Electronics">Electronics</button>
+            <button class="category-button" data-category="Fashion">Fashion</button>
+            <button class="category-button" data-category="Accessories">Accessories</button>
+            <button class="category-button" data-category="Home">Home</button>
+        </div>
+    </section>
+
+    <section id="productsSection">
+        <div class="section-heading">
+            <div>
+                <h2>Trending Products</h2>
+                <p>Great finds, just for you.</p>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <p id="resultsCount">Showing all products</p>
+            <select id="sortSelect" aria-label="Sort products">
+                <option value="featured">Sort: Featured</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+            </select>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="benefits">
+        <div class="benefit">
+            <div class="emoji">🚚</div>
+            <h3>Free Shipping</h3>
+            <p>Free delivery on orders above ₹999.</p>
+        </div>
+        <div class="benefit">
+            <div class="emoji">🔒</div>
+            <h3>Secure Shopping</h3>
+            <p>Your shopping experience matters to us.</p>
+        </div>
+        <div class="benefit">
+            <div class="emoji">💬</div>
+            <h3>Customer Support</h3>
+            <p>We're here to help with your questions.</p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="logo">Shop<span style="color:white">Ease.</span></div>
+    <p>Your everyday shopping destination.</p>
+    <p>© 2026 ShopEase. College project demo.</p>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="cart-panel" id="cartPanel" aria-label="Shopping cart">
+    <div class="cart-header">
+        <h2>Your Cart 🛒</h2>
+        <button class="close-button" id="closeCart">✕ Close</button>
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <div class="cart-footer">
+        <div class="total-row">
+            <span>Total</span>
+            <span id="cartTotal">₹0</span>
+        </div>
+        <button class="checkout-button" id="checkoutButton">
+            Proceed to Checkout
+        </button>
+    </div>
+</aside>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const products = [
+    {
+        id: 1,
+        name: "Wireless Headphones",
+        category: "Electronics",
+        price: 1499,
+        oldPrice: 2499,
+        rating: 4.7,
+        reviews: 128,
+        discount: 40,
+        description: "Comfortable headphones with clear sound.",
+        image: "photo-1505740420928-5e560c06d30e"
+    },
+    {
+        id: 2,
+        name: "Smart Watch",
+        category: "Electronics",
+        price: 2199,
+        oldPrice: 3499,
+        rating: 4.5,
+        reviews: 96,
+        discount: 37,
+        description: "Track activity and stay connected.",
+        image: "photo-1523275335684-37898b6baf30"
+    },
+    {
+        id: 3,
+        name: "Classic Sneakers",
+        category: "Fashion",
+        price: 1799,
+        oldPrice: 2999,
+        rating: 4.8,
+        reviews: 210,
+        discount: 40,
+        description: "Everyday sneakers with a stylish design.",
+        image: "photo-1542291026-7eec264c27ff"
+    },
+    {
+        id: 4,
+        name: "Travel Backpack",
+        category: "Accessories",
+        price: 999,
+        oldPrice: 1599,
+        rating: 4.4,
+        reviews: 75,
+        discount: 38,
+        description: "A practical bag for college and travel.",
+        image: "photo-1553062407-98eeb64c6a62"
+    },
+    {
+        id: 5,
+        name: "Sunglasses",
+        category: "Accessories",
+        price: 699,
+        oldPrice: 1199,
+        rating: 4.3,
+        reviews: 62,
+        discount: 42,
+        description: "A simple, stylish look for sunny days.",
+        image: "photo-1511499767150-a48a237f0083"
+    },
+    {
+        id: 6,
+        name: "Desk Lamp",
+        category: "Home",
+        price: 849,
+        oldPrice: 1299,
+        rating: 4.6,
+        reviews: 84,
+        discount: 35,
+        description: "Brighten up your desk or study space.",
+        image: "photo-1507473885765-e6ed057f782c"
+    },
+    {
+        id: 7,
+        name: "Digital Camera",
+        category: "Electronics",
+        price: 5299,
+        oldPrice: 6999,
+        rating: 4.6,
+        reviews: 53,
+        discount: 24,
+        description: "Capture memorable moments with ease.",
+        image: "photo-1516035069371-29a1b244cc32"
+    },
+    {
+        id: 8,
+        name: "Casual T-Shirt",
+        category: "Fashion",
+        price: 499,
+        oldPrice: 799,
+        rating: 4.2,
+        reviews: 144,
+        discount: 38,
+        description: "A comfortable T-shirt for everyday wear.",
+        image: "photo-1521572163474-6864f9cf17ab"
+    }
+];
+
+let activeCategory = "All";
+let searchText = "";
+let cart = [];
+
+const productGrid = document.getElementById("productGrid");
+const searchInput = document.getElementById("searchInput");
+const sortSelect = document.getElementById("sortSelect");
+const cartPanel = document.getElementById("cartPanel");
+const overlay = document.getElementById("overlay");
+const toast = document.getElementById("toast");
+
+const money = amount =>
+    "₹" + amount.toLocaleString("en-IN");
+
+function renderProducts() {
+    let filtered = products.filter(product => {
+        const matchesCategory =
+            activeCategory === "All" ||
+            product.category === activeCategory;
+
+        const searchable =
+            (product.name + " " + product.category + " " +
+             product.description).toLowerCase();
+
+        return matchesCategory &&
+               searchable.includes(searchText.toLowerCase());
+    });
+
+    if (sortSelect.value === "low") {
+        filtered.sort((a, b) => a.price - b.price);
+    } else if (sortSelect.value === "high") {
+        filtered.sort((a, b) => b.price - a.price);
+    } else if (sortSelect.value === "rating") {
+        filtered.sort((a, b) => b.rating - a.rating);
+    }
+
+    document.getElementById("resultsCount").textContent =
+        `Showing ${filtered.length} product${filtered.length === 1 ? "" : "s"}`;
+
+    if (filtered.length === 0) {
+        productGrid.innerHTML =
+            '<div class="empty-message">No products found. Try another search.</div>';
+        return;
+    }
+
+    productGrid.innerHTML = filtered.map(product => `
+        <article class="product-card">
+            <div class="product-image">
+                <span class="discount">${product.discount}% OFF</span>
+                <img
+                    src="https://images.unsplash.com/${product.image}?auto=format&fit=crop&w=500&q=80"
+                    alt="${product.name}"
+                    loading="lazy">
+            </div>
+
+            <div class="product-info">
+                <div class="product-category">${product.category}</div>
+                <h3>${product.name}</h3>
+                <p class="description">${product.description}</p>
+
+                <div class="rating">
+                    ★★★★★ <span>${product.rating} (${product.reviews} reviews)</span>
+                </div>
+
+                <div class="price-row">
+                    <span class="price">${money(product.price)}</span>
+                    <span class="old-price">${money(product.oldPrice)}</span>
+                </div>
+
+                <button class="add-button" data-add="${product.id}">
+                    + Add to Cart
+                </button>
+            </div>
+        </article>
+    `).join("");
+}
+
+function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(showToast.timer);
+    showToast.timer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2200);
+}
+
+function addToCart(id) {
+    const item = cart.find(product => product.id === id);
+
+    if (item) {
+        item.quantity++;
+    } else {
+        cart.push({ id, quantity: 1 });
+    }
+
+    updateCart();
+    showToast("Product added to your cart!");
+}
+
+function updateCart() {
+    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    document.getElementById("cartCount").textContent = count;
+
+    const cartItems = document.getElementById("cartItems");
+
+    if (cart.length === 0) {
+        cartItems.innerHTML =
+            '<p class="empty-message">Your cart is empty. Add a product to get started!</p>';
+    } else {
+        cartItems.innerHTML = cart.map(item => {
+            const product = products.find(p => p.id === item.id);
+
+            return `
+                <div class="cart-item">
+                    <div>
+                        <strong>${product.name}</strong>
+                        <p>${money(product.price)} each</p>
+
+                        <div class="quantity-controls">
+                            <button data-change="${product.id}" data-delta="-1"
+                                    aria-label="Decrease quantity">−</button>
+                            <span>${item.quantity}</span>
+                            <button data-change="${product.id}" data-delta="1"
+                                    aria-label="Increase quantity">+</button>
+                        </div>
+
+                        <button class="remove-button" data-remove="${product.id}">
+                            Remove
+                        </button>
+                    </div>
+
+                    <strong>${money(product.price * item.quantity)}</strong>
+                </div>
+            `;
+        }).join("");
+    }
+
+    const total = cart.reduce((sum, item) => {
+        const product = products.find(p => p.id === item.id);
+        return sum + product.price * item.quantity;
+    }, 0);
+
+    document.getElementById("cartTotal").textContent = money(total);
+}
+
+function changeQuantity(id, delta) {
+    const item = cart.find(product => product.id === id);
+    if (!item) return;
+
+    item.quantity += delta;
+
+    if (item.quantity <= 0) {
+        cart = cart.filter(product => product.id !== id);
+    }
+
+    updateCart();
+}
+
+function openCart() {
+    cartPanel.classList.add("open");
+    overlay.classList.add("show");
+}
+
+function closeCart() {
+    cartPanel.classList.remove("open");
+    overlay.classList.remove("show");
+}
+
+document.getElementById("categories").addEventListener("click", event => {
+    const button = event.target.closest("[data-category]");
+    if (!button) return;
+
+    activeCategory = button.dataset.category;
+
+    document.querySelectorAll(".category-button").forEach(btn => {
+        btn.classList.toggle("active", btn === button);
+    });
+
+    renderProducts();
+});
+
+productGrid.addEventListener("click", event => {
+    const button = event.target.closest("[data-add]");
+    if (button) addToCart(Number(button.dataset.add));
+});
+
+document.getElementById("cartItems").addEventListener("click", event => {
+    const changeButton = event.target.closest("[data-change]");
+    const removeButton = event.target.closest("[data-remove]");
+
+    if (changeButton) {
+        changeQuantity(
+            Number(changeButton.dataset.change),
+            Number(changeButton.dataset.delta)
+        );
+    }
+
+    if (removeButton) {
+        const id = Number(removeButton.dataset.remove);
+        cart = cart.filter(item => item.id !== id);
+        updateCart();
+        showToast("Product removed from cart.");
+    }
+});
+
+searchInput.addEventListener("input", () => {
+    searchText = searchInput.value.trim();
+    renderProducts();
+});
+
+document.getElementById("searchButton").addEventListener("click", () => {
+    searchText = searchInput.value.trim();
+    renderProducts();
+});
+
+sortSelect.addEventListener("change", renderProducts);
+
+document.getElementById("shopNow").addEventListener("click", () => {
+    document.getElementById("productsSection").scrollIntoView({
+        behavior: "smooth"
+    });
+});
+
+document.getElementById("openCart").addEventListener("click", openCart);
+document.getElementById("closeCart").addEventListener("click", closeCart);
+overlay.addEventListener("click", closeCart);
+
+document.getElementById("checkoutButton").addEventListener("click", () => {
+    if (cart.length === 0) {
+        showToast("Your cart is empty!");
+    } else {
+        showToast("Demo checkout only — no payment was taken.");
+    }
+});
+
+renderProducts();
+updateCart();
+</script>
+
+</body>
+</html>
